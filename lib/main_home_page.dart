@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'search_app_bar.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
 
@@ -13,6 +14,7 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage> {
   int _selectedTabIndex = 0;
+  final int _searchTabIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
     SearchScreen(),
@@ -28,10 +30,9 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: const Text('appBar'),
-      ),
+      appBar: SearchAppBar(
+        title: 'AppBar',
+        isSearchEnabled: _selectedTabIndex == _searchTabIndex),
 
       body: Center(
         child: _widgetOptions.elementAt(_selectedTabIndex),
