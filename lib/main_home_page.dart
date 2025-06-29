@@ -1,43 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'search_app_bar.dart';
-import 'search_screen.dart';
-import 'settings_screen.dart';
 
-class MainHomePage extends StatefulWidget {
-  const MainHomePage({super.key, required this.title});
+class MainHomePage extends StatelessWidget {
+  const MainHomePage({
+    super.key,
+    required this.title,
+    required this.child,
+  });
 
   final String title;
+  final Widget child;
 
-  @override
-  State<MainHomePage> createState() => _MainHomePageState();
-}
-
-class _MainHomePageState extends State<MainHomePage> {
-  int _selectedTabIndex = 0;
-  final int _searchTabIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    SearchScreen(),
-    SettingsScreen(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedTabIndex = index;
-    });
+  int _calculateSelectedIndex(BuildContext context) {
+    final String location = GoRouterState.of(context).uri.path;
+    if (location.startsWith('/settings')) {
+      return 1;
+    }
+    return 0;
   }
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = _calculateSelectedIndex(context);
+    final isSearchTab = selectedIndex == 0;
+
     return Scaffold(
       appBar: SearchAppBar(
-        title: 'AppBar',
-        isSearchEnabled: _selectedTabIndex == _searchTabIndex),
-
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedTabIndex),
+        title: title,
+        isSearchEnabled: isSearchTab,
       ),
-
+      body: Center(
+        child: child,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -49,9 +44,18 @@ class _MainHomePageState extends State<MainHomePage> {
             label: 'Settings',
           ),
         ],
-        currentIndex: _selectedTabIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.green,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              context.go('/search');
+              break;
+            case 1:
+              context.go('/settings');
+              break;
+          }
+        },
       ),
     );
   }
