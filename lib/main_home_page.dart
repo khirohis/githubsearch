@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'search_app_bar.dart';
 
 class MainHomePage extends StatelessWidget {
   const MainHomePage({
@@ -23,12 +22,11 @@ class MainHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
-    final isSearchTab = selectedIndex == 0;
 
     return Scaffold(
-      appBar: SearchAppBar(
-        title: title,
-        isSearchEnabled: isSearchTab,
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text('AppBar'),
       ),
       body: Center(
         child: child,

@@ -38,6 +38,8 @@ dependencies:
 
   go_router: ^15.2.4
 
+  http: ^1.4.0
+
   flutter_riverpod: ^2.6.1
 
 dev_dependencies:

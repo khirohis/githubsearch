@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'main_home_page.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
+import 'search_result_list.dart';
 
 // Navigatorのグローバルキー
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -42,12 +43,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
-      // ShellRouteの外側に配置したい画面があればここに追加
-      // 例:
-      // GoRoute(
-      //   path: '/detail/:id',
-      //   builder: (context, state) => DetailScreen(id: state.pathParameters['id']!),
-      // ),
+      // 検索結果一覧画面 (ShellRouteの外側)
+      GoRoute(
+        path: '/results',
+        builder: (context, state) {
+          final query = state.uri.queryParameters['q'] ?? '';
+          return SearchResultList(query: query);
+        },
+      ),
     ],
   );
 });
