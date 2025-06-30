@@ -1,51 +1,22 @@
-class RepositoryItem {
-  final int id;
-  final String name;
-  final String fullName;
-  final String? language;
-  final int stargazersCount;
-  final int watchersCount;
-  final int forksCount;
-  final Owner owner;
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'repository_owner.dart';
 
-  RepositoryItem({
-    required this.id,
-    required this.name,
-    required this.fullName,
-    this.language,
-    required this.stargazersCount,
-    required this.watchersCount,
-    required this.forksCount,
-    required this.owner,
-  });
+part 'repository_item.freezed.dart';
+part 'repository_item.g.dart';
 
-  factory RepositoryItem.fromJson(Map<String, dynamic> json) {
-    return RepositoryItem(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      fullName: json['full_name'] as String,
-      language: json['language'] as String?,
-      stargazersCount: json['stargazers_count'] as int,
-      watchersCount: json['watchers_count'] as int,
-      forksCount: json['forks_count'] as int,
-      owner: Owner.fromJson(json['owner'] as Map<String, dynamic>),
-    );
-  }
-}
+@freezed
+abstract class RepositoryItem with _$RepositoryItem {
+  const factory RepositoryItem({
+    required int id,
+    required String name,
+    @JsonKey(name: 'full_name') required String fullName,
+    String? language,
+    @JsonKey(name: 'stargazers_count') required int stargazersCount,
+    @JsonKey(name: 'watchers_count') required int watchersCount,
+    @JsonKey(name: 'forks_count') required int forksCount,
+    required RepositoryOwner owner,
+  }) = _RepositoryItem;
 
-class Owner {
-  final String login;
-  final String avatarUrl;
-
-  Owner({
-    required this.login,
-    required this.avatarUrl,
-  });
-
-  factory Owner.fromJson(Map<String, dynamic> json) {
-    return Owner(
-      login: json['login'] as String,
-      avatarUrl: json['avatar_url'] as String,
-    );
-  }
+  factory RepositoryItem.fromJson(Map<String, dynamic> json) =>
+      _$RepositoryItemFromJson(json);
 }
