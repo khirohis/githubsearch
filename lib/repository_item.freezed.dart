@@ -177,17 +177,21 @@ class _RepositoryItem implements RepositoryItem {
   final int id;
   @override
   final String name;
+// (annotation target ignore removed — redundant due to file-level ignore)
   @override
   @JsonKey(name: 'full_name')
   final String fullName;
   @override
   final String? language;
+// (annotation target ignore removed — redundant due to file-level ignore)
   @override
   @JsonKey(name: 'stargazers_count')
   final int stargazersCount;
+// (annotation target ignore removed — redundant due to file-level ignore)
   @override
   @JsonKey(name: 'watchers_count')
   final int watchersCount;
+// (annotation target ignore removed — redundant due to file-level ignore)
   @override
   @JsonKey(name: 'forks_count')
   final int forksCount;

@@ -99,6 +99,7 @@ class _RepositoryOwner implements RepositoryOwner {
 
   @override
   final String login;
+// (annotation target ignore removed — redundant due to file-level ignore)
   @override
   @JsonKey(name: 'avatar_url')
   final String avatarUrl;

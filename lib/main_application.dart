@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'router.dart';
+import 'package:githubsearch/router.dart';
+import 'package:githubsearch/l10n/app_localizations.dart';
 
 class MainApplication extends ConsumerWidget {
   const MainApplication({super.key});
@@ -17,6 +18,8 @@ class MainApplication extends ConsumerWidget {
         useMaterial3: true,
       ),
       routerConfig: router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

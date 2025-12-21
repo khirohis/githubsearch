@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:githubsearch/l10n/app_localizations.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -27,6 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -34,16 +36,16 @@ class _SearchScreenState extends State<SearchScreen> {
         children: [
           TextField(
             controller: _controller,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Search Repositories',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: l10n.searchHint,
             ),
             onSubmitted: (_) => _search(),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: _search,
-            child: const Text('Search'),
+            child: Text(l10n.search),
           ),
         ],
       ),
